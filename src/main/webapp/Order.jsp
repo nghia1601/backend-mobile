@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -249,7 +247,6 @@ table.table .avatar {
 }
 
 </style>
-
 <script>
 $(document).ready(function(){
 	// Activate tooltip
@@ -286,7 +283,7 @@ $(document).ready(function(){
 						<h2> <b>ADMIN</b></h2>
 					</div>
 					<div class="col-sm-6">
-					    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Product</span></a>
+					    <!-- <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a> -->
 					    <a href="/hello-web-app/account" class="btn btn-danger" > <span>Account</span></a>
 					    <a href="/hello-web-app/order" class="btn btn-danger" > <span>Order</span></a>
 					    <a href="/hello-web-app/Crud" class="btn btn-danger" > <span>Product</span></a>						
@@ -294,51 +291,47 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="selectAll">
-								<label for="selectAll"></label>
-							</span>
-						</th>
-						<th>Title</th>
-						<th>Price</th>
-						<th>Descriptine</th>
-						<th>Category</th> 
-						<th>Image</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach items="${products }" var="p">
-					<tr>
-						<td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="options[]" value="1">
-								<label for="checkbox1"></label>
-							</span>
-						</td>
-						<td>${p.title }</td>
-						<td>${p.price }</td>
-						<td>${p.description }</td>
-						<td>${p.category }</td>
-						<td>
-				            <img src="http://localhost:8080/hello-web-app/img/${p.image}" style="max-width: 100px; max-height: 100px;">
-				        </td>
-						
-						
-					<td>
-					    <a href="editProduct?productId=${p.id}" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-					    <a href="deleteProduct?productId=${p.id}" class="delete" ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-					</td>
-
-
-					</tr>
-					</c:forEach>
-					
-				</tbody>
+			    <thead>
+			        <tr>
+			            <th>
+			                <span class="custom-checkbox">
+			                    <input type="checkbox" id="selectAll">
+			                    <label for="selectAll"></label>
+			                </span>
+			            </th>
+			            <th>Ma HD</th>
+			            <th>Ho Ten KH</th>
+			            <th>SĐT</th>
+			            <th>Dia Chi</th> 
+			            <th>PTTT</th>
+			            <th>Tong</th>
+			            <th>Action</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			        <c:forEach items="${orders}" var="order">
+			            <tr>
+			                <td>
+			                    <span class="custom-checkbox">
+			                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
+			                        <label for="checkbox1"></label>
+			                    </span>
+			                </td>
+			                <td>${order.maHD}</td>
+			                <td>${order.hoTenKH}</td>
+			                <td>${order.sdt}</td>
+			                <td>${order.diaChi}</td>
+			                <td>${order.pTTT}</td>
+			                <td>${order.tongTien} VNĐ</td>
+			                <td>
+			                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+			                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+			                </td>
+			            </tr>
+			        </c:forEach>
+			    </tbody>
 			</table>
+
 			<div class="clearfix">
 				<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
 				<ul class="pagination">
@@ -354,27 +347,27 @@ $(document).ready(function(){
 		</div>
 	</div>        
 </div>
-<!-- Add Modal HTML -->
+<!-- Edit Modal HTML -->
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="/hello-web-app/addProduct" method="post"> <!-- Sửa action của form -->
+			<form action="addPone" method="post"> 
 			    <div class="modal-body">                    
 			        <div class="form-group">
 			            <label>Title</label>
-			            <input type="text" class="form-control" required name="title"> <!-- Sửa name của input -->
+			            <input type="text" class="form-control" required name="name"> 
 			        </div>
 			        <div class="form-group">
 			            <label>Price</label>
 			            <input type="text" class="form-control" required name="price">
 			        </div>
 			        <div class="form-group">
-			            <label>Description</label> <!-- Sửa label của mô tả -->
-			            <input type="text" class="form-control" required name="description"> <!-- Sửa name của input -->
+			            <label>Descriptine</label>
+			            <input type="text" class="form-control" required name="image">
 			        </div>
 			        <div class="form-group">
 			            <label>Category</label>
-			            <input type="text" class="form-control" required name="category">
+			            <input type="text" class="form-control" required name="image">
 			        </div>
 			        <div class="form-group">
 			            <label>Image</label>
@@ -386,51 +379,46 @@ $(document).ready(function(){
 			        <input type="submit" class="btn btn-success" value="Add">
 			    </div>
 			</form>
+
 		</div>
 	</div>
 </div>
-
-
- <!-- Edit Modal HTML -->
-
+<!-- Edit Modal HTML -->
 <div id="editEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="/hello-web-app/editProduct" method="post">
-            
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" class="form-control" required name="title" value="${product.title}">
-                    </div>
-                    <div class="form-group">
-                        <label>Price</label>
-                        <input type="text" class="form-control" required name="price" value="${product.price}">
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" class="form-control" required name="description" value="${product.description}">
-                    </div>
-                    <div class="form-group">
-                        <label>Category</label>
-                        <input type="text" class="form-control" required name="category" value="${product.category}">
-                    </div>
-                    <div class="form-group">
-                        <label>Image</label>
-                        <input type="text" class="form-control" required name="image" value="${product.image}">
-                    </div>
-                    <input type="hidden" name="productId" value="${product.id}">
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-success" value="Edit">
-                </div>
-                
-            </form>
-        </div>
-    </div>
-</div> 
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form action="addPone" method="post"> 
+			    <div class="modal-body">                    
+			        <div class="form-group">
+			            <label>Title</label>
+			            <input type="text" class="form-control" required name="name"> 
+			        </div>
+			        <div class="form-group">
+			            <label>Price</label>
+			            <input type="text" class="form-control" required name="price">
+			        </div>
+			        <div class="form-group">
+			            <label>Descriptine</label>
+			            <input type="text" class="form-control" required name="image">
+			        </div>
+			        <div class="form-group">
+			            <label>Category</label>
+			            <input type="text" class="form-control" required name="image">
+			        </div>
+			        <div class="form-group">
+			            <label>Image</label>
+			            <input type="text" class="form-control" required name="image">
+			        </div>
+			    </div>
+			    <div class="modal-footer">
+			        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+			        <input type="submit" class="btn btn-success" value="Edit">
+			    </div>
+			</form>
 
+		</div>
+	</div>
+</div>
 <!-- Delete Modal HTML -->
 <div id="deleteEmployeeModal" class="modal fade">
 	<div class="modal-dialog">

@@ -1,4 +1,3 @@
-// Crud.java
 package com.cgm.hello_web_app.controller;
 
 import java.io.IOException;
@@ -11,18 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cgm.hello_web_app.model.Product;
-import com.cgm.hello_web_app.model.ProductDAO;
+import com.cgm.hello_web_app.model.Checkout;
+import com.cgm.hello_web_app.model.CheckoutDAO;
 
-@WebServlet("/crud")
-public class Crud extends HttpServlet {
+
+@WebServlet("/order")
+public class OrderController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ProductDAO productDAO = new ProductDAO();
-        List<Product> products = productDAO.getAllProducts();
-        request.setAttribute("products", products);
-        RequestDispatcher rd = request.getRequestDispatcher("/Crud.jsp");
+        CheckoutDAO orderDAO = new CheckoutDAO();
+        List<Checkout> orders = orderDAO.getAllOrders();
+        request.setAttribute("orders", orders);
+        RequestDispatcher rd = request.getRequestDispatcher("/Order.jsp");
         rd.forward(request, response);
     }
 

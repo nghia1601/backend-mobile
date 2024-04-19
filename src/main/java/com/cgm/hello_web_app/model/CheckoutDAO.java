@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CheckoutDAO {
 
@@ -81,5 +83,34 @@ public class CheckoutDAO {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public List<Checkout> getAllOrders() {
+        List<Checkout> orders = new ArrayList<>();
+        String query = "SELECT * FROM hoadon";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_mobleadvanced", "root", "0000");
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Checkout order = new Checkout();
+                order.setMaHD(resultSet.getString("maHD"));
+                order.setHoTenKH(resultSet.getString("hoTenKH"));
+                order.setSdt(resultSet.getString("sdt"));
+                order.setDiaChi(resultSet.getString("diaChi"));
+                order.setpTTT(resultSet.getString("pTTT"));
+                order.setTongTien(resultSet.getDouble("tongTien"));
+                // Lấy danh sách chi tiết hóa đơn và gán vào order
+                // order.setChitiethoadon(....);
+                orders.add(order);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ tại đây nếu cần
+        }
+
+        return orders;
     }
 }
